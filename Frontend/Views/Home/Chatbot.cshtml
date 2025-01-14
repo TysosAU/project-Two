@@ -1,0 +1,47 @@
+﻿@model Frontend.Models.Convo
+@{
+    ViewData["Title"] = "Chatbot";
+}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header text-bg-primary text-center">
+                    <h4 class="mb-0">Chatbot</h4>
+                </div>
+                <div class="card-body">
+                    <div id="chat-history" class="mb-3" style="max-height: 600px; overflow-y: auto;">
+                        @if (!string.IsNullOrEmpty(Model.userInput))
+                        {
+                            <div class="text-end mb-3">
+                                <div class="alert alert-secondary d-inline-block text-start">
+                                    <strong>You:</strong>
+                                    <p class="mb-0">@Model.userInput</p>
+                                </div>
+                            </div>
+                        }
+                        @if (!string.IsNullOrEmpty(ViewBag.ChatbotMessage))
+                        {
+                            <div class="text-start mb-3">
+                                <div class="alert alert-secondary d-inline-block">
+                                    <strong>Bot:</strong>
+                                    <p class="mb-0">@ViewBag.ChatbotMessage</p>
+                                </div>
+                            </div>
+                        }
+                        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                        {
+                            <div class="alert alert-danger">
+                                <p class="mb-0">@ViewBag.ErrorMessage</p>
+                            </div>
+                        }
+                    </div>
+                    <form asp-action="Chatbot" method="post" class="d-flex">
+                        <input type="text" name="UserInput" id="userInput" class="form-control me-2" placeholder="Type your message..." required style="font-size: 1.2rem; height: 50px;" /> <!-- Increased height and font size -->
+                        <button type="submit" class="btn btn-primary" style="height: 50px;">Send</button> <!-- Adjusted button size to match input field -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
